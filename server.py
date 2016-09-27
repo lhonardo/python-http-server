@@ -92,7 +92,7 @@ class Server:
          if (request_method == 'POST'):
              print ("Post recebido.")
              #postContent += string.split('\n')[13].split('=')[1] + ' '
-             postContent += string.split('\n')[12].split('=')[1] + ' '
+             postContent += string.split('\n')[14].split('=')[1] + ' '
              print (postContent)
              try:
                  f = open('www/words.html','w')

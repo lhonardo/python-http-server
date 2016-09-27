@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="10">
+<script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <title>Python HTTP Server</title>
 </head>
 
@@ -16,14 +17,32 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <form action="index.html" method="delete">
+    <form action="index.html">
         Clique para limpar dados do server:
-        <input type ="submit" value="Delete">
+        <input type ="submit" onclick="$.delete();">
     </form>
 
     </center>
 
 </body>
 <script>
+$.delete = function(url, data, callback, type){
+ 
+  if ( $.isFunction(data) ){
+    type = type || callback,
+        callback = data,
+        data = {}
+  }
+ 
+  return $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: function(){
+      alert('deletado')
+    },
+    data: data,
+    contentType: type
+  });
+}
 </script>
 </html>
