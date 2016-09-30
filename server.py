@@ -62,6 +62,7 @@ class Server:
      current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
      h += 'Date: ' + current_date +'\n'
      h += 'Server: Simple-Python-HTTP-Server\n'
+     h += 'Content-Type: text/html; charset=utf-8'
      h += 'Connection: close\n\n'  # sinal que a conexao vai ser fechada apos completar o request
 
      return h
@@ -92,7 +93,9 @@ class Server:
          if (request_method == 'POST'):
              print ("Post recebido.")
              #postContent += string.split('\n')[13].split('=')[1] + ' '
-             postContent += string.split('\n')[14].split('=')[1] + ' '
+             contentTemp = string.split('\n')[12].split('=')[1] + ' '
+             contentTemp = contentTemp.replace("+", " ")
+             postContent += contentTemp
              print (postContent)
              try:
                  f = open('www/words.html','w')
@@ -109,6 +112,7 @@ class Server:
              try:
                  f = open('www/words.html','w')
                  f.truncate()#deleta???
+                 postContent = ""
              except Exception as e: #em caso do arquivo nao ser encontrado, gera pagina 404
                  print ("Erro, arquivo nao encontrado. Código de resposta 404.\n", e)
 
