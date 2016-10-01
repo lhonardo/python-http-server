@@ -4,6 +4,9 @@
 import socket  # Suporte a rede
 import signal  # Suporte a sinal (server encerra quando recebe sinal)
 import time    # Pegar hora atual
+import json # Tratar json
+
+
 
 class Server:
 
@@ -79,39 +82,43 @@ class Server:
          # conn - socket para o cliente
          # addr - endereco do cliente
 
-         print("Nova conexão de:", addr)
+         print("Nova conexao de:", addr)
 
          data = conn.recv(1024) #recebe dados do cliente
          string = bytes.decode(data) #converte isso para uma string
 
          #determina o tipo de request
          request_method = string.split(' ')[0]
-         print ("Method: ", request_method)
-         print ("Request body: ", string)
+         # print ("Method: ", request_method)
+         # print ("Request body: ", string)
 
          #Se string[0:x] == 'POST':
          if (request_method == 'POST'):
              print ("Post recebido.")
              #postContent += string.split('\n')[13].split('=')[1] + ' '
-             contentTemp = string.split('\n')[12].split('=')[1] + ' '
-             contentTemp = contentTemp.replace("+", " ")
-             postContent += contentTemp
-             print (postContent)
+             # print (string)
+             postContent = string.split('\n')[-1]
+             # print (contentTemp)
+             # contentTemp = string.split('\n')[13].split('=')[1] + ' '
+
+             # postContent += contentTemp
              try:
-                 f = open('www/words.html','w')
-                 f.write(postContent + '\n') # escreve no iframe palavras vindas do POST
+                 f = open('www/tweets.json','w')
+                 f.write(postContent) # escreve no json POST
                  f.close()
+
              except Exception as e: #em caso do arquivo nao ser encontrado, gera pagina 404
                  print ("Erro, arquivo nao encontrado. Código de resposta 404.\n", e)
 
-             request_method = 'GET'
+             # request_method = 'GET'
 
          #Se string[0:x] == 'DELETE':
          if (request_method == 'DELETE'):
              print ("Iniciando deleção.")
              try:
-                 f = open('www/words.html','w')
-                 f.truncate()#deleta???
+                 f = open('www/tweets.json','w')
+                 f.write("[]") # começa um json novo;
+                 f.close();
                  postContent = ""
              except Exception as e: #em caso do arquivo nao ser encontrado, gera pagina 404
                  print ("Erro, arquivo nao encontrado. Código de resposta 404.\n", e)

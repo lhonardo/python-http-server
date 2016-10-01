@@ -2,47 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="10">
 <script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<title>Python HTTP Server</title>
+<script src="js/app.js"></script>
+<link rel="stylesheet" media="all" href="css/bootstrap.min.css">
+<link rel="stylesheet" media="all" href="css/style.css">
+<title>Twitter - Python HTTP Server</title>
 </head>
-
-<body>
-    <center>
-    
-    <iframe id="iframe" src="words.html"></iframe> 
-
-    <form action="index.html" method="post">
-         Palavra para a frase: <input type="text" name="fname"><br>
-        <input type="submit" value="Enviar">
-    </form>
-
-    <form action="index.html">
-        Clique para limpar dados do server:
-        <input type ="submit" onclick="$.delete();">
-    </form>
-
-    </center>
-
-</body>
+  <body>
+    <header>
+      <h1>Twitter - Redes de Computadores</h1>
+    </header>
+    <div class="body container">
+      <input type="text" id="tweetContent" placeholder="O que está acontecendo?" class="col-md-10"><button id="twittar" class="btn btn-default col-md-2"><i class="glyphicon glyphicon-comment"></i>Tweetar</button>
+      <div class="tweets col-md-12">
+      </div>
+    </div>
+  </body>
 <script>
-$.delete = function(url, data, callback, type){
- 
-  if ( $.isFunction(data) ){
-    type = type || callback,
-        callback = data,
-        data = {}
-  }
- 
-  return $.ajax({
-    url: url,
-    type: 'DELETE',
-    success: function(){
-      alert('deletado')
-    },
-    data: data,
-    contentType: type
+$(document).ready(function() {
+  $("#twittar").click(function(){
+    $.post();
   });
-}
+});
+
+window.onload = function() {
+  loadTweets();
+};
 </script>
 </html>

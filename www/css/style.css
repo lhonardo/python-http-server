@@ -1,0 +1,43 @@
+header{
+  height: 50px;
+  overflow: hidden;
+  background-color: #339dc3;
+}
+h1{
+  color: white;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+}
+body{
+  background-color: #f5f8fa;
+}
+input{
+  height: 45px;
+}
+.btn{
+  background-color: #339dc3;
+  color: white;
+  font-size: 1.6em;
+}
+i{
+  color: white;
+  margin-right: 10px;
+}
+.body{
+  padding: 50px 0;
+}
+.individual-tweets{
+  width: 100%;
+  height: 90px;
+  padding: 10px 20px;
+
+  margin: 5px 0;
+  background-color: white;
+}
+.individual-tweets .content{
+  font-size: 2em;
+}
+.individual-tweets .owner{
+  font-size: 1.5em;
+}
