@@ -8,13 +8,21 @@
 </head>
   <body>
     <form action="admin.html">
-        <button id="delete">Limpar twittes</button>
+        <button id="delete">Limpar twittes.</button>
+        Edição (formato deve ser [linha:texto editado]): <input id="edit" type="text" name="edit"><br>
+        <input type="submit" value="Editar">
     </form>
   </body>
 <script>
 $(document).ready(function() {
   $("#delete").click(function(){
     $.delete();
+  });
+});
+
+$(document).ready(function() {
+  $("#edit").click(function(){
+    $.edit();
   });
 });
 </script>
