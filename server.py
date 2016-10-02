@@ -112,6 +112,26 @@ class Server:
 
              # request_method = 'GET'
 
+         #Se string[0:x] == 'PUT':
+         if (request_method == 'PUT'):
+             print ("Edição recebida.")
+             #postContent += string.split('\n')[13].split('=')[1] + ' '
+             # print (string)
+             postContent = string.split('\n')[-1]
+             # print (contentTemp)
+             # contentTemp = string.split('\n')[13].split('=')[1] + ' '
+
+             # postContent += contentTemp
+             try:
+                 f = open('www/tweets.json','w')
+                 # laço com busca por linha e alteração de conteúdo?
+                 f.close()
+
+             except Exception as e: #em caso do arquivo nao ser encontrado, gera pagina 404
+                 print ("Erro, arquivo nao encontrado. Código de resposta 404.\n", e)
+
+             # request_method = 'GET'
+
          #Se string[0:x] == 'DELETE':
          if (request_method == 'DELETE'):
              print ("Iniciando deleção.")
