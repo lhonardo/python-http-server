@@ -21,12 +21,21 @@ $.post = function(url, data, callback, type){
     type: 'POST',
     contentType:'json',
     data: JSON.stringify(jsonFile.responseJSON),
-    dataType: 'text',
+    dataType: 'text'
   });
 
   $(".tweets").prepend('<div class="individual-tweets"><span class="owner">'+newTweet.owner+' Tweetou:</span><p class="content">'+newTweet.content+'</p></div>');
 }
 
+$.edit = function(url, data, callback, type){
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    contentType:'json',
+    data: JSON.stringify(jsonFile.responseJSON),
+    dataType: 'text'
+  });
+}
 
 $.delete = function(url, data, callback, type){
   $.ajax({
