@@ -41,9 +41,10 @@ $(document).ready(function() {
 
 
   loadTweets();
-  addEdit();
 
-  $(".editable").click(function(){
+  classToUse = "content." + localStorage['owner'];
+
+  $(document).on("click", "."+classToUse, function(){
     editInput(this);
   });
 

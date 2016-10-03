@@ -6,20 +6,12 @@ function loadTweets(){
       jsonSize = data.length;
       $(".tweets").empty();
       $.each( data.reverse() , function(key, val){
-          $(".tweets").append('<div class="individual-tweets"><span class="owner">'+val.owner+'</span><span> Tweetou:</span><p class="content">'+val.content+'</p></div>');
+          $(".tweets").append('<div class="individual-tweets"><span class="owner">'+val.owner+'</span><span> Tweetou:</span><p class="content '+ val.owner +'">'+ val.content + '</p></div>');
       });
     }
   });
 }
 
-function addEdit(){
-  $.each( $(".individual-tweets .owner") , function(k, v){
-    if (v.innerText == localStorage['owner']){
-      // v.siblings("p").className += " editable";
-      console.log(v.parent());
-    }
-  });
-}
 
 function editInput(element){
   $(element).replaceWith(function(){
@@ -29,6 +21,14 @@ function editInput(element){
              })
   })
 };
+
+function addEdit(){
+  $.each( $(".individual-tweets .content") , function(k, v){
+    if ((v.className.indexOf(localStorage['owner']) >= 0)){
+      this.className += " editable";
+    }
+  });
+}
 
 $.post = function(url, data, callback, type){
   var newTweet = new Object();
