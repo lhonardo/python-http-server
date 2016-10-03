@@ -1,12 +1,12 @@
 <!DOCTPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="js/app.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" media="all" href="css/style.css">
-<title>Twitter - Python HTTP Server</title>
+  <meta charset="UTF-8">
+  <script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="js/app.js"></script>
+  <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
+  <title>Twitter - Python HTTP Server</title>
 </head>
   <body>
     <header>
@@ -51,21 +51,18 @@ $(document).ready(function() {
     editTweet(this);
   });
 
-
-
-});
-
-window.onload = function() {
   $(document).on('mouseover', '.individual-tweets', function(){
     this.children.namedItem("editInfo").style = "display: block";
   });
 
+});
+
+window.onload = function() {
   $("#tweetContent").keyup(function(event){
       if(event.keyCode == 13){
           $("#tweetar").click();
       }
   });
-
 };
 
 window.setInterval(function(){
