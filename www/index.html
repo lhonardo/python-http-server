@@ -13,20 +13,56 @@
       <h1>Twitter - Redes de Computadores</h1>
     </header>
     <div class="body container">
-      <input type="text" id="tweetContent" placeholder="O que está acontecendo?" class="col-md-10"><button id="twittar" class="btn btn-default col-md-2"><i class="glyphicon glyphicon-comment"></i>Tweetar</button>
+      <input type="text" id="tweetContent" placeholder="O que está acontecendo?" class="col-md-10"><button id="tweetar" class="btn btn-default col-md-2"><i class="glyphicon glyphicon-comment"></i>Tweetar</button>
       <div class="tweets col-md-12">
       </div>
+    </div>
+
+    <div id="login" style="display:none">
+      <input type="text" id="loginInput" placeholder="Qual o seu login?">
+      <button class="btn btn-default loginButton">Login!</button>
     </div>
   </body>
 <script>
 $(document).ready(function() {
-  $("#twittar").click(function(){
+  $("#tweetar").click(function(){
     $.post();
+    $("#tweetContent").val('');
   });
+
+  if (localStorage['owner'] == undefined){
+    $('#login').show();
+  }
+
+  $(".loginButton").click(function(){
+    localStorage['owner'] = $("#loginInput").val();
+    $("#login").hide();
+  });
+
+
+  loadTweets();
+  addEdit();
+
+  $(".editable").click(function(){
+    editInput(this);
+  });
+
 });
 
 window.onload = function() {
-  loadTweets();
+  // if ($(".individual-tweets .owner").val();
+  $("#tweetContent").keyup(function(event){
+      if(event.keyCode == 13){
+          $("#tweetar").click();
+      }
+  });
+
+
 };
+
+window.setInterval(function(){
+  loadTweets();
+}, 10000);
+
 </script>
 </html>
