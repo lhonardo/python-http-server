@@ -2,28 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/app.js"></script>
-<title>Python HTTP Server</title>
+<link rel="stylesheet" media="all" href="css/bootstrap.min.css">
+<link rel="stylesheet" media="all" href="css/style.css">
+<title>Admin - Python HTTP Server</title>
 </head>
   <body>
-    <form action="admin.html">
-        <button id="delete">Limpar twittes.</button>
-        Edição (formato deve ser [linha:texto editado]): <input id="edit" type="text" name="edit"><br>
-        <input type="submit" value="Editar">
-    </form>
+    <header>
+      <h1>Admin - Redes de Computadores</h1>
+    </header>
+    <div class="container">
+      <button class="btn btn-danger" id="delete">Apagar todos os Tweets!</button>
+    </div>
+
   </body>
 <script>
-$(document).ready(function() {
-  $("#delete").click(function(){
-    $.delete();
+  $(document).ready(function() {
+    $("#delete").click(function(){
+      $.deleleTweets();
+    });
   });
-});
-
-$(document).ready(function() {
-  $("#edit").click(function(){
-    $.edit();
-  });
-});
 </script>
 </html>

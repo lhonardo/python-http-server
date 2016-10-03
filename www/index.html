@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/app.js"></script>
-<link rel="stylesheet" media="all" href="css/bootstrap.min.css">
-<link rel="stylesheet" media="all" href="css/style.css">
+<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="css/style.css">
 <title>Twitter - Python HTTP Server</title>
 </head>
   <body>
@@ -21,6 +21,12 @@
     <div id="login" style="display:none">
       <input type="text" id="loginInput" placeholder="Qual o seu login?">
       <button class="btn btn-default loginButton">Login!</button>
+    </div>
+
+    <div id="edit" style="display:none">
+      <input type="text" id="editInput" placeholder="Tweet Content">
+      <button class="btn btn-default editButton">Alterar!</button>
+      <button class="btn btn-danger cancelButton">Cancelar</button>
     </div>
   </body>
 <script>
@@ -39,25 +45,26 @@ $(document).ready(function() {
     $("#login").hide();
   });
 
-
   loadTweets();
 
-  classToUse = "content." + localStorage['owner'];
-
-  $(document).on("click", "."+classToUse, function(){
-    editInput(this);
+  $(document).on("click", "."+"content." + localStorage['owner'], function(){
+    editTweet(this);
   });
+
+
 
 });
 
 window.onload = function() {
-  // if ($(".individual-tweets .owner").val();
+  $(document).on('mouseover', '.individual-tweets', function(){
+    this.children.namedItem("editInfo").style = "display: block";
+  });
+
   $("#tweetContent").keyup(function(event){
       if(event.keyCode == 13){
           $("#tweetar").click();
       }
   });
-
 
 };
 

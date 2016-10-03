@@ -5,21 +5,33 @@ function loadTweets(){
     if (data.length !== jsonSize){
       jsonSize = data.length;
       $(".tweets").empty();
-      $.each( data.reverse() , function(key, val){
-          $(".tweets").append('<div class="individual-tweets"><span class="owner">'+val.owner+'</span><span> Tweetou:</span><p class="content '+ val.owner +'">'+ val.content + '</p></div>');
+      $.each( data , function(key, val){
+          if (val.owner == localStorage['owner']){
+            $(".tweets").prepend('<div class="individual-tweets"><span class="editInfo" name="editInfo" style="display:none">Editar</span><span class="owner">'+val.owner+'</span><span> Tweetou:</span><p id="'+key+'" class="content '+ val.owner +'">'+ val.content + '</p></div>');
+          }else{
+            $(".tweets").prepend('<div class="individual-tweets"><span class="owner">'+val.owner+'</span><span> Tweetou:</span><p id="'+key+'" class="content '+ val.owner +'">'+ val.content + '</p></div>');
+          }
       });
     }
   });
 }
 
+function editTweet(element){
+  $("#edit").show();
+  $("#editInput").val(element.textContent);
+  $(".cancelButton").click(function(){
+    $("#edit").hide();
+  });
 
-function editInput(element){
-  $(element).replaceWith(function(){
-      return $('<input/>', {
-                'class': this.className,
-                 content: this.value
-             })
-  })
+  $(".editButton").click(function(){
+    $.getJSON("tweets.json" , function(data){
+      data[element.id].content = $("#editInput").val();
+      $.put(data);
+      element.textContent = $("#editInput").val();
+      $("#edit").hide();
+    });
+  });
+
 };
 
 function addEdit(){
@@ -28,6 +40,17 @@ function addEdit(){
       this.className += " editable";
     }
   });
+}
+
+$.put = function(data, url){
+    console.log(data);
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      contentType:'json',
+      data: JSON.stringify(data),
+      dataType: 'text'
+    });
 }
 
 $.post = function(url, data, callback, type){
@@ -45,23 +68,15 @@ $.post = function(url, data, callback, type){
       dataType: 'text'
     });
 
+    var key = data.length-1;
+    $(".tweets").prepend('<div class="individual-tweets"><span class="owner">'+newTweet.owner+'</span><span> Tweetou:</span><p id="'+key+'" class="content '+newTweet.owner+'">'+newTweet.content+'</p></div>');
+
    });
 
-  $(".tweets").prepend('<div class="individual-tweets"><span class="owner">'+newTweet.owner+'</span><span> Tweetou:</span><p class="content">'+newTweet.content+'</p></div>');
 
 }
 
-$.edit = function(url, data, callback, type){
-  $.ajax({
-    url: url,
-    type: 'PUT',
-    contentType:'json',
-    data: JSON.stringify(jsonFile.responseJSON),
-    dataType: 'text'
-  });
-}
-
-$.delete = function(url, data, callback, type){
+$.deleleTweets = function(url, data, callback, type){
   $.ajax({
     url: url,
     type: 'DELETE',
